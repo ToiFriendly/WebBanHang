@@ -2,7 +2,7 @@
 // Require SessionHelper and other necessary files
 require_once('app/config/database.php');
 require_once('app/models/CategoryModel.php');
-
+require_once 'app/helpers/SessionHelper.php'; // Thêm SessionHelper
 class CategoryController
 {
     private $model;
@@ -12,15 +12,26 @@ class CategoryController
         $db = (new Database())->getConnection();
         $this->model = new CategoryModel($db);
     }
-
+    public function isAdmin()
+    {
+        return SessionHelper::isAdmin();
+    }
     public function list()
     {
-        $categories = $this->model->getCategories();
+        if (!$this->isAdmin()) {
+            echo "Bạn không có quyền truy cập chức năng này!";
+            exit;
+        }
+        $categories = $this->model->getCategory();
         include 'app/views/category/list.php';
     }
 
     public function add()
     {
+        if (!$this->isAdmin()) {
+            echo "Bạn không có quyền truy cập chức năng này!";
+            exit;
+        }
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = $_POST['name'];
             $description = $_POST['description'];
@@ -32,6 +43,10 @@ class CategoryController
 
     public function edit()
     {
+        if (!$this->isAdmin()) {
+            echo "Bạn không có quyền truy cập chức năng này!";
+            exit;
+        }
         $id = $_GET['id'] ?? null;
         if (!$id) return;
 
@@ -48,6 +63,10 @@ class CategoryController
 
     public function delete()
     {
+        if (!$this->isAdmin()) {
+            echo "Bạn không có quyền truy cập chức năng này!";
+            exit;
+        }
         $id = $_GET['id'] ?? null;
         if ($id) {
             $this->model->deleteCategory($id);

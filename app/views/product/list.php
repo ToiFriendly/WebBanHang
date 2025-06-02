@@ -124,13 +124,15 @@
                         <p class="card-text"><span class="badge category-badge bg-info text-white"><?php echo htmlspecialchars($product->category_name, ENT_QUOTES, 'UTF-8'); ?></span></p>
                         <div class="mt-auto d-flex flex-wrap gap-2">
                             <a href="/webbanhang/Product/addToCart/<?php echo $product->id; ?>" class="btn btn-add-cart btn-sm">Thêm vào giỏ</a>
-                            <a href="/webbanhang/Product/edit/<?php echo $product->id; ?>" class="btn btn-warning btn-action btn-sm">Sửa</a>
-                            <a href="/webbanhang/Product/delete/<?php echo $product->id; ?>" class="btn btn-danger btn-action btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">Xóa</a>
+                            <?php if (SessionHelper::isAdmin()) { ?>
+                                <a href="/webbanhang/Product/edit/<?php echo $product->id; ?>" class="btn btn-warning btn-action btn-sm">Sửa</a>
+                                <a href="/webbanhang/Product/delete/<?php echo $product->id; ?>" class="btn btn-danger btn-action btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">Xóa</a>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
             </div>
-            <?php endforeach; ?>ssss
+        <?php endforeach; ?>
     </div>
 </div>
 <?php include 'app/views/shares/footer.php'; ?>

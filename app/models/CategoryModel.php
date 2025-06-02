@@ -7,7 +7,7 @@ class CategoryModel
     {
         $this->conn = $db;
     }
-    public function getCategories()
+    public function getCategory()
     {
         $query = "SELECT id, name, description FROM " . $this->table_name;
         $stmt = $this->conn->prepare($query);
