@@ -344,10 +344,9 @@ class ProductController
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['keyword'])) {
             $keyword = $_GET['keyword'];
             $products = $this->productModel->searchProducts($keyword);
-            include 'app/views/product/list.php';
         } else {
             $products = $this->productModel->getProducts();
-            include 'app/views/product/list.php';
         }
+        include 'app/views/product/list.php';
     }
 }

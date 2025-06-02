@@ -28,7 +28,7 @@
         font-weight: 600;
         margin-bottom: 10px;
         display: -webkit-box;
-        -webkit-line-clamp: 2;
+        /*-webkit-line-clamp: 2;*/
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -39,7 +39,7 @@
         color: #666;
         margin-bottom: 10px;
         display: -webkit-box;
-        -webkit-line-clamp: 3;
+        /*-webkit-line-clamp: 3;*/
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
