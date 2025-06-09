@@ -16,7 +16,6 @@ $action = isset($url[1]) && $url[1] != '' ? $url[1] : 'index';
 
 // Kiểm tra xem controller và action có tồn tại không
 if (!file_exists('app/controllers/' . $controllerName . '.php')) {
-    // Xử lý không tìm thấy controller
     die('Controller not found');
 }
 
@@ -24,9 +23,17 @@ require_once 'app/controllers/' . $controllerName . '.php';
 $controller = new $controllerName();
 
 if (!method_exists($controller, $action)) {
-    // Xử lý không tìm thấy action
     die('Action not found');
 }
 
-// Gọi action với các tham số còn lại (nếu có)
-call_user_func_array([$controller, $action], array_slice($url, 2));
+// Sử dụng reflection để kiểm tra số lượng tham số của phương thức
+$reflection = new ReflectionMethod($controller, $action);
+$paramCount = $reflection->getNumberOfRequiredParameters();
+$params = array_slice($url, 2);
+
+if (count($params) < $paramCount) {
+    die('Missing required parameters for action ' . $action);
+}
+
+// Gọi action với các tham số
+call_user_func_array([$controller, $action], $params);

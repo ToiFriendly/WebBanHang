@@ -30,16 +30,23 @@
                     <a class="nav-link" href="/webbanhang/Product/">Danh Sách Đĩa Nhạc</a>
                 </li>
                 <?php if (SessionHelper::isAdmin()) { ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/webbanhang/Product/add">Thêm Đĩa Nhạc</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/webbanhang/Category/list">Danh sách thể loại nhạc</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Admin Options
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                            <li><a class="dropdown-item" href="/webbanhang/Product/add">Thêm Đĩa Nhạc</a></li>
+                            <li><a class="dropdown-item" href="/webbanhang/Category/list">Danh sách thể loại nhạc</a></li>
+                            <li><a class="dropdown-item" href="/webbanhang/Account/list">Danh sách người dùng</a></li>
+                        </ul>
                     </li>
                 <?php } ?>
                 <?php if (SessionHelper::isLoggedIn()) { ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/webbanhang/Product/Cart">Giỏ hàng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/webbanhang/Account/show">Hồ sơ người dùng</a>
                     </li>
                 <?php } ?>
                 <li class="nav-item">
